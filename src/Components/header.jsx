@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import logoImage from '/GOLD_LB.png';
 
 const NAV_ITEMS = [
   { id: "about", label: "About" },
@@ -29,7 +30,7 @@ export default function Header({ onLogoClick }) {
   return (
     <header className="header">
       <div className="logo-container" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
-        <img src="/GOLD_LB.png" className="image" width="40" alt="Logo" />
+        <img src={logoImage} className="image" width="40" alt="Logo" />
       </div>
 
       <nav aria-label="Primary">

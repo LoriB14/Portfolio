@@ -14,16 +14,24 @@ function Page() {
   const [showIntro, setShowIntro] = useState(true);
   
   useEffect(() => {
-    // Always scroll to top on page load
+    // Always scroll to top on page load and prevent auto-scroll
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
     window.scrollTo(0, 0);
   }, []);
   
   const handleLogoClick = () => {
     setShowIntro(true);
+    window.scrollTo(0, 0);
   };
   
   if (showIntro) {
-    return <IntroAnimation onComplete={() => setShowIntro(false)} />;
+    return <IntroAnimation onComplete={() => {
+      setShowIntro(false);
+      // Ensure we stay at top when intro completes
+      setTimeout(() => window.scrollTo(0, 0), 0);
+    }} />;
   }
   
   return (
