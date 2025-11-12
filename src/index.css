@@ -4,19 +4,43 @@
 
 body {
   padding: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #bec3b7;
-  color: rgb(0, 0, 0);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #37010b 0%, #350111 100%); /* Deep cherry-red to purple gradient */
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bebas Neue', 'Impact', Arial Black, sans-serif;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
 }
 
 h1 {
   margin-top: 30px;
+  font-size: 4.5rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2.5px;
 }
 
 .nav-list {
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  gap: 2rem; /* add spacing between nav links */
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .header {
@@ -26,8 +50,7 @@ h1 {
 }
 
 .nav-list-item {
-  margin-right: 20px;
-  font-size: 2.5rem;
+  margin: 0; /* spacing handled by gap */
 }
 
 .image {
@@ -40,7 +63,42 @@ h1 {
   align-items: center;
   alignment-baseline: middle;
   margin-inline: auto;
-  font-size: 2rem;
+  font-size: 1.125rem;
+  max-width: 1200px;
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 4rem;
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-social a {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-social a:hover {
+  color: #FFD700;
+  transform: translateY(-3px) scale(1.1);
+}
+
+.footer-social svg {
+  width: 28px;
+  height: 28px;
 }
 
 /* Smooth scrolling for anchor links */
@@ -48,23 +106,141 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Keyframe animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+h1 {
+  animation: fadeInUp 0.8s ease-out;
+}
+
 /* Style nav anchors to look like buttons/links */
 .nav-list-item a {
-  color: inherit;
+  color: #ffffff;
   text-decoration: none;
   padding: 6px 10px;
   border-radius: 6px;
   display: inline-block;
+  font-size: 18px; /* increased from 16px for better luxury feel */
+  font-weight: 600;
+  transition: color 180ms ease, background-color 180ms ease, border-bottom-color 180ms ease, transform 120ms ease;
+  border-bottom: 2px solid transparent; /* for animated underline effect */
 }
 
 .nav-list-item a:hover,
 .nav-list-item a:focus {
-  background: rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.15);
+  color: #FFD700; /* Gold accent on hover for flashy effect */
   outline: none;
+  border-bottom-color: #FFD700;
+  transform: translateY(-2px) scale(1.05);
+  animation: pulse 0.6s ease-in-out;
+}
+
+/* Active/visible section */
+.nav-list-item a.active {
+  color: #FFD700;
+  font-weight: 700;
+  border-bottom-color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Brand name beside logo */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.portfolio-label {
+  font-weight: 600;
+  font-size: 0.7rem;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #000000;
+  margin-top: -8px;
 }
 
 /* Section spacing so anchor targets aren't hidden under any fixed header */
 .section {
-  padding: 40px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 40px;
+  margin-bottom: 30px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease-out backwards;
 }
+
+.section:nth-child(1) { animation-delay: 0.1s; }
+.section:nth-child(2) { animation-delay: 0.2s; }
+.section:nth-child(3) { animation-delay: 0.3s; }
+.section:nth-child(4) { animation-delay: 0.4s; }
+.section:nth-child(5) { animation-delay: 0.5s; }
+
+.section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.section p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.95);
+  font-weight: 300;
+}
+
+/* Sticky header */
+:root {
+  --header-height: 72px; /* adjust if you change header padding/size */
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(139, 21, 56, 0.95); /* Match cherry-red with opacity */
+  padding: 12px 20px;
+  height: var(--header-height);
+  display: flex; /* preserve layout */
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+}
+
+/* Ensure anchored sections are visible below the sticky header */
+.section {
+  scroll-margin-top: calc(var(--header-height) + 12px);
+}
+
+/* If you prefer a fixed header instead, change `position: sticky` to `position: fixed` and adjust body padding accordingly. */

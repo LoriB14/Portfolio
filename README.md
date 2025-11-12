@@ -6,6 +6,7 @@ It showcases my projects, experience, and skills in a modern and responsive layo
 ---
 
 ## 🚀 Features
+
 - Fast & modern frontend with React + Vite ⚡
 - Responsive layout that works on all devices 📱
 - Simple and clean design 🎨
@@ -14,6 +15,7 @@ It showcases my projects, experience, and skills in a modern and responsive layo
 ---
 
 ## 🛠️ Tech Stack
+
 - **React 19**
 - **Vite**
 - **CSS / Bootstrap**
@@ -22,6 +24,7 @@ It showcases my projects, experience, and skills in a modern and responsive layo
 ---
 
 ## 🧑‍💻 Author
+
 **Lori Battouk**  
 📍 Toronto, Canada 🇨🇦  
 💼 [LinkedIn](https://www.linkedin.com/in/LoriB14)  
@@ -30,4 +33,5 @@ It showcases my projects, experience, and skills in a modern and responsive layo
 ---
 
 ## 📝 License
+
 This project is open-source and available under the MIT License.
