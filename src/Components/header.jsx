@@ -8,7 +8,7 @@ const NAV_ITEMS = [
   { id: "contact", label: "Contact" },
 ];
 
-export default function Header() {
+export default function Header({ onLogoClick }) {
   const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <header className="header">
-      <div className="logo-container">
+      <div className="logo-container" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
         <img src="/src/assets/GOLD_LB.png" className="image" width="40" alt="Logo" />
       </div>
 
