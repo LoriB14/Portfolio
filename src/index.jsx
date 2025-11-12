@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
 import './index.css';
-import Header from './components/Header.jsx';
+import Header from './Components/header.jsx';
 import Main from './Components/sections.jsx';
-import Footer from './components/Footer.jsx';
+import Footer from './Components/footer.jsx';
 import IntroAnimation from './Components/IntroAnimation.jsx';
 
 const root = createRoot(document.getElementById('root'));
