@@ -1,32 +1,17 @@
-export default function main(){
+import About from './Sections/About.jsx';
+import Education from './Sections/Education.jsx';
+import Skills from './Sections/Skills.jsx';
+import Projects from './Sections/Projects.jsx';
+import Contact from './Sections/Contact.jsx';
+
+export default function Main() {
   return (
-    <main className ="main">
-      <h1>This is my website</h1>
-
-      <section id="about" className="section">
-        <h2>About</h2>
-        <p>Placeholder about content — replace with your bio.</p>
-      </section>
-
-      <section id="education" className="section">
-        <h2>Education</h2>
-        <p>Placeholder education details.</p>
-      </section>
-
-      <section id="skills" className="section">
-        <h2>Skills</h2>
-        <p>Placeholder skills list.</p>
-      </section>
-
-      <section id="projects" className="section">
-        <h2>Projects</h2>
-        <p>Placeholder projects gallery.</p>
-      </section>
-
-      <section id="contact" className="section">
-        <h2>Contact</h2>
-        <p>Placeholder contact info or form.</p>
-      </section>
+    <main className="main">
+      <About />
+      <Education />
+      <Skills />
+      <Projects />
+      <Contact />
     </main>
   );
 }

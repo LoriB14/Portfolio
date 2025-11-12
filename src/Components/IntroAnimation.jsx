@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 export default function IntroAnimation({ onComplete }) {
   const [displayedText, setDisplayedText] = useState('');
   const [typingComplete, setTypingComplete] = useState(false);
-  const fullText = "Hello user, my name is Lori Battouk and this is my website.";
+  const fullText = "Hi, I'm Lori Battouk. \n Welcome to my portfolio.";
   
   useEffect(() => {
     let currentIndex = 0;
@@ -29,7 +29,7 @@ export default function IntroAnimation({ onComplete }) {
   return (
     <div className="intro-screen" onClick={handleClick}>
       <div className="intro-content">
-        <div className="intro-text">
+        <div className="intro-text" style={{ whiteSpace: 'pre-line' }}>
           {displayedText}
           {!typingComplete && <span className="cursor">|</span>}
         </div>

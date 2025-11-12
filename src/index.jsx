@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import Header from './components/Header.jsx';
 import Main from './Components/sections.jsx';
@@ -12,6 +12,11 @@ root.render(<Page />);
 
 function Page() {
   const [showIntro, setShowIntro] = useState(true);
+  
+  useEffect(() => {
+    // Always scroll to top on page load
+    window.scrollTo(0, 0);
+  }, []);
   
   const handleLogoClick = () => {
     setShowIntro(true);
