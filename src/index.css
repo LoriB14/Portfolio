@@ -726,16 +726,30 @@ h1 {
   transform: translateY(-1px);
 }
 
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .submit-status {
   margin-top: 2rem;
   padding: 15px 25px;
   text-align: center;
-  background: rgba(76, 175, 80, 0.2);
-  border: 2px solid rgba(76, 175, 80, 0.5);
   border-radius: 10px;
-  color: #90EE90;
   font-weight: 600;
   animation: fadeInUp 0.5s ease-out;
+}
+
+.submit-status.success {
+  background: rgba(76, 175, 80, 0.2);
+  border: 2px solid rgba(76, 175, 80, 0.5);
+  color: #90EE90;
+}
+
+.submit-status.error {
+  background: rgba(244, 67, 54, 0.2);
+  border: 2px solid rgba(244, 67, 54, 0.5);
+  color: #FF6B6B;
 }
 
 /* If you prefer a fixed header instead, change `position: sticky` to `position: fixed` and adjust body padding accordingly. */
