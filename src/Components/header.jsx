@@ -1,35 +1,25 @@
-import { useEffect, useState } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import logoImage from '/GOLD_LB.png';
 
 const NAV_ITEMS = [
-  { id: "about", label: "About" },
-  { id: "education", label: "Education" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+  { id: "about", label: "About", path: "/about" },
+  { id: "education", label: "Education", path: "/education" },
+  { id: "skills", label: "Skills", path: "/skills" },
+  { id: "projects", label: "Projects", path: "/projects" },
+  { id: "contact", label: "Contact", path: "/contact" },
 ];
 
-export default function Header({ onLogoClick }) {
-  const [activeId, setActiveId] = useState("");
+export default function Header() {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  useEffect(() => {
-    const sections = Array.from(document.querySelectorAll("section[id]"));
-    if (!sections.length) return;
-
-    const obsOptions = { root: null, rootMargin: "0px", threshold: 0.6 };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) setActiveId(entry.target.id);
-      });
-    }, obsOptions);
-
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, []);
+  const handleLogoClick = () => {
+    navigate('/');
+  };
 
   return (
     <header className="header">
-      <div className="logo-container" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
+      <div className="logo-container" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
         <img src={logoImage} className="image" width="40" alt="Logo" />
       </div>
 
@@ -37,14 +27,13 @@ export default function Header({ onLogoClick }) {
         <ul className="nav-list">
           {NAV_ITEMS.map((item) => (
             <li key={item.id} className="nav-list-item">
-              <a
-                href={`#${item.id}`}
-                aria-label={`Go to ${item.label} section`}
-                className={activeId === item.id ? "active" : ""}
-                aria-current={activeId === item.id ? "page" : undefined}
+              <NavLink
+                to={item.path}
+                aria-label={`Go to ${item.label} page`}
+                className={({ isActive }) => isActive ? "active" : ""}
               >
                 {item.label}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>

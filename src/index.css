@@ -10,6 +10,56 @@ body {
   font-size: 18px;
   line-height: 1.6;
   min-height: 100vh;
+  position: relative;
+}
+
+/* Grainy texture overlay for elegance */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0.03) 4px
+    );
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure content is above grain */
+.main-content,
+.header,
+.intro-screen {
+  position: relative;
+  z-index: 2;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -50,6 +100,7 @@ h2 {
   font-size: 4rem;
   margin-bottom: 1.2rem;
   letter-spacing: 2.5px;
+  text-align: center;
 }
 
 .nav-list {
@@ -208,7 +259,7 @@ h1 {
   margin-top: -8px;
 }
 
-/* Section spacing so anchor targets aren't hidden under any fixed header */
+/* Section spacing - Full page sections for router pages */
 .section {
   padding: 50px 60px;
   margin-bottom: 40px;
@@ -219,7 +270,7 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.18);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: fadeInUp 0.6s ease-out backwards;
-  min-height: 400px;
+  min-height: calc(100vh - var(--header-height) - 100px); /* Fill viewport minus header and footer */
 }
 
 .section:nth-child(1) { animation-delay: 0.1s; }
@@ -260,9 +311,7 @@ h1 {
 }
 
 /* Ensure anchored sections are visible below the sticky header */
-.section {
-  scroll-margin-top: calc(var(--header-height) + 12px);
-}
+/* No longer needed for router-based navigation */
 
 /* Intro Animation Screen */
 .intro-screen {
@@ -283,29 +332,67 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
+  padding: 0 40px;
 }
 
-.intro-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3rem;
-  font-weight: 500;
+.intro-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 6rem;
+  font-weight: 400;
   color: #ffffff;
   text-align: center;
-  padding: 0 60px;
-  max-width: 900px;
-  line-height: 1.5;
-  letter-spacing: 1px;
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.2);
-  animation: textGlow 2s ease-in-out infinite alternate;
+  letter-spacing: 8px;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
+  animation: nameGlow 2s ease-in-out infinite alternate;
+  margin: 0;
 }
 
-@keyframes textGlow {
+.intro-welcome {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  letter-spacing: 2px;
+  margin: 0;
+  animation: smoothFadeIn 1.2s ease-out;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes smoothFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-update {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #FFD700;
+  text-align: center;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 10px 30px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 25px;
+  background: rgba(255, 215, 0, 0.05);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes nameGlow {
   from {
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.2);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
   }
   to {
-    text-shadow: 0 0 25px rgba(255, 215, 0, 0.6), 0 0 45px rgba(255, 215, 0, 0.3);
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.7), 0 0 60px rgba(255, 215, 0, 0.4);
   }
 }
 
@@ -380,7 +467,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px 0 20px 0;
+  margin: 80px 0 20px 0;
   position: relative;
 }
 
@@ -507,6 +594,148 @@ h1 {
   color: rgba(255, 255, 255, 0.6);
   margin-top: 20px;
   font-style: italic;
+}
+
+/* About Page Styles */
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: #FFD700;
+  text-align: center;
+  letter-spacing: 4px;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Coming Soon Banner */
+.coming-soon-banner {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: #FFD700;
+  text-align: center;
+  letter-spacing: 6px;
+  margin: 0.5rem auto 8rem;
+  padding: 25px 40px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  background: rgba(255, 215, 0, 0.05);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+  max-width: 500px;
+  display: block;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+/* Contact Form Styles */
+.contact-intro {
+  text-align: center;
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  color: #FFD700;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #FFD700;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 18px 40px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  color: #37010b;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
+  background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+}
+
+.submit-btn:active {
+  transform: translateY(-1px);
+}
+
+.submit-status {
+  margin-top: 2rem;
+  padding: 15px 25px;
+  text-align: center;
+  background: rgba(76, 175, 80, 0.2);
+  border: 2px solid rgba(76, 175, 80, 0.5);
+  border-radius: 10px;
+  color: #90EE90;
+  font-weight: 600;
+  animation: fadeInUp 0.5s ease-out;
 }
 
 /* If you prefer a fixed header instead, change `position: sticky` to `position: fixed` and adjust body padding accordingly. */

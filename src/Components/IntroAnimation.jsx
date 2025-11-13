@@ -1,39 +1,52 @@
 import { useEffect, useState } from 'react';
 
 export default function IntroAnimation({ onComplete }) {
-  const [displayedText, setDisplayedText] = useState('');
-  const [typingComplete, setTypingComplete] = useState(false);
-  const fullText = "Hi, I'm Lori Battouk. \n Welcome to my portfolio.";
+  const [nameText, setNameText] = useState('');
+  const [showWelcome, setShowWelcome] = useState(false);
+  const [canContinue, setCanContinue] = useState(false);
+  
+  const name = "Lori Battouk";
+  const welcomeText = "Welcome to my portfolio";
   
   useEffect(() => {
-    let currentIndex = 0;
-    
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setDisplayedText(fullText.slice(0, currentIndex));
-        currentIndex++;
+    // Type out name first
+    let nameIndex = 0;
+    const nameInterval = setInterval(() => {
+      if (nameIndex < name.length) {
+        setNameText(name.slice(0, nameIndex + 1));
+        nameIndex++;
       } else {
-        clearInterval(typingInterval);
-        setTypingComplete(true);
-        // DO NOT auto-advance - wait for user click only
+        clearInterval(nameInterval);
+        // Show welcome message after name is complete
+        setTimeout(() => {
+          setShowWelcome(true);
+          // Allow user to continue after welcome appears
+          setTimeout(() => {
+            setCanContinue(true);
+          }, 500);
+        }, 500);
       }
-    }, 80); // Typing speed: 80ms per character (slower)
-    
-    return () => clearInterval(typingInterval);
+    }, 80);
+
+    return () => clearInterval(nameInterval);
   }, []);
   
   const handleClick = () => {
-    onComplete();
+    if (canContinue) {
+      onComplete();
+    }
   };
   
   return (
     <div className="intro-screen" onClick={handleClick}>
       <div className="intro-content">
-        <div className="intro-text" style={{ whiteSpace: 'pre-line' }}>
-          {displayedText}
-          {!typingComplete && <span className="cursor">|</span>}
-        </div>
-        <div className="click-hint">Click anywhere to enter</div>
+        <h1 className="intro-name">{nameText}</h1>
+        {showWelcome && (
+          <p className="intro-welcome">{welcomeText}</p>
+        )}
+        {canContinue && (
+          <div className="click-hint">Click anywhere to enter</div>
+        )}
       </div>
     </div>
   );

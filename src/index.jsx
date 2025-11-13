@@ -1,44 +1,29 @@
 import { createRoot } from 'react-dom/client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './index.css';
-import Header from './Components/header.jsx';
-import Main from './Components/sections.jsx';
-import Footer from './Components/footer.jsx';
-import IntroAnimation from './Components/IntroAnimation.jsx';
+
+// Import Pages
+import Home from './Pages/Home.jsx';
+import AboutPage from './Pages/AboutPage.jsx';
+import EducationPage from './Pages/EducationPage.jsx';
+import SkillsPage from './Pages/SkillsPage.jsx';
+import ProjectsPage from './Pages/ProjectsPage.jsx';
+import ContactPage from './Pages/ContactPage.jsx';
 
 const root = createRoot(document.getElementById('root'));
 
-root.render(<Page />);
-
-function Page() {
-  const [showIntro, setShowIntro] = useState(true);
-  
-  useEffect(() => {
-    // Always scroll to top on page load and prevent auto-scroll
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-  }, []);
-  
-  const handleLogoClick = () => {
-    setShowIntro(true);
-    window.scrollTo(0, 0);
-  };
-  
-  if (showIntro) {
-    return <IntroAnimation onComplete={() => {
-      setShowIntro(false);
-      // Ensure we stay at top when intro completes
-      setTimeout(() => window.scrollTo(0, 0), 0);
-    }} />;
-  }
-  
-  return (
-    <div className="main-content">
-      <Header onLogoClick={handleLogoClick} />
-      <Main />
-      <Footer />
-    </div>
-  );
-}
+root.render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/education" element={<EducationPage />} />
+      <Route path="/skills" element={<SkillsPage />} />
+      <Route path="/projects" element={<ProjectsPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      {/* Redirect any unknown routes to home */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  </BrowserRouter>
+);

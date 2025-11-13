@@ -65,6 +65,8 @@ export default function Projects() {
     <section id="projects" className="section projects-section">
       <h2>Projects</h2>
       
+      <p className="coming-soon-banner">Coming Soon</p>
+      
       <div className="project-wheel-container" onWheel={handleWheel}>
         <div className="project-wheel" style={{ transform: `rotateY(${rotation}deg)` }}>
           {PROJECTS.map((project, index) => (
