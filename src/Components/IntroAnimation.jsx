@@ -4,7 +4,8 @@ import logoImage from '/GOLD_LB.png';
 export default function IntroAnimation({ onComplete }) {
   const [showLogo, setShowLogo] = useState(false);
   const [logoShrinking, setLogoShrinking] = useState(false);
-  const [showMain, setShowMain] = useState(false);
+  const [showName, setShowName] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
   const [showUnderline, setShowUnderline] = useState(false);
   const [canContinue, setCanContinue] = useState(false);
   
@@ -17,25 +18,30 @@ export default function IntroAnimation({ onComplete }) {
       setShowLogo(true);
     }, 300);
     
-    // Step 2: Start shrinking logo
+    // Step 2: Start shrinking logo after it's visible
     setTimeout(() => {
       setLogoShrinking(true);
-    }, 1800);
+    }, 2000);
     
-    // Step 3: Show name and welcome together as logo disappears
+    // Step 3: Show name AFTER logo completely disappears
     setTimeout(() => {
-      setShowMain(true);
-    }, 2500);
+      setShowName(true);
+    }, 3200);
     
-    // Step 4: Show underline shortly after
+    // Step 4: Show underline shortly after name
     setTimeout(() => {
       setShowUnderline(true);
-    }, 2700);
+    }, 3500);
     
-    // Step 5: Show click hint shortly after
+    // Step 5: Show welcome message a few seconds after name
+    setTimeout(() => {
+      setShowWelcome(true);
+    }, 5200);
+    
+    // Step 6: Show click hint a bit after welcome
     setTimeout(() => {
       setCanContinue(true);
-    }, 3200);
+    }, 6200);
   }, []);
   
   const handleClick = () => {
@@ -70,15 +76,15 @@ export default function IntroAnimation({ onComplete }) {
           />
         )}
         
-        {showMain && (
-          <>
-            <div className="intro-name-container">
-              <h1 className="intro-name transform-gpu animate-fade-in-up">{name}</h1>
-              {showUnderline && <div className="intro-underline"></div>}
-            </div>
-            
-            <p className="intro-welcome transform-gpu animate-fade-in-up">{welcomeText}</p>
-          </>
+        {showName && (
+          <div className="intro-name-container">
+            <h1 className="intro-name transform-gpu animate-fade-in-up">{name}</h1>
+            {showUnderline && <div className="intro-underline"></div>}
+          </div>
+        )}
+        
+        {showWelcome && (
+          <p className="intro-welcome transform-gpu animate-fade-in-up">{welcomeText}</p>
         )}
         
         {canContinue && (

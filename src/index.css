@@ -266,6 +266,7 @@ h1 {
 /* Section spacing - Full page sections for router pages */
 .section {
   padding: 50px 60px;
+  margin-top: 30px;
   margin-bottom: 40px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.08);
@@ -408,14 +409,14 @@ h1 {
   width: 500px;
   height: auto;
   opacity: 0;
-  filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.8));
+  filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.5));
   will-change: transform, opacity;
   animation: logoBigFadeIn 1s ease-out forwards;
   position: absolute;
 }
 
 .intro-logo-big.shrinking {
-  animation: logoShrinkAway 1s ease-in-out forwards;
+  animation: logoShrinkAway 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes logoBigFadeIn {
@@ -434,13 +435,14 @@ h1 {
     opacity: 1;
     transform: scale(1);
   }
-  50% {
-    opacity: 0.5;
-    transform: scale(0.5);
+  60% {
+    opacity: 0.4;
+    transform: scale(0.3);
   }
   100% {
     opacity: 0;
     transform: scale(0);
+    visibility: hidden;
   }
 }
 
@@ -478,18 +480,19 @@ h1 {
   font-weight: 400;
   color: #ffffff;
   text-align: center;
-  letter-spacing: 8px;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  letter-spacing: 12px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   margin: 0;
   opacity: 0;
-  animation: quickFadeIn 0.6s ease-out forwards;
+  animation: netflixFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   will-change: transform, opacity;
+  text-transform: uppercase;
 }
 
-@keyframes quickFadeIn {
+@keyframes netflixFadeIn {
   0% {
     opacity: 0;
-    transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, 20px, 0);
   }
   100% {
     opacity: 1;
@@ -500,23 +503,18 @@ h1 {
 /* Animated Underline */
 .intro-underline {
   width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #D4AF37, #D4AF37, transparent);
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.6), 0 0 24px rgba(212, 175, 55, 0.3);
-  animation: underlineExpandSmooth 1s ease-in-out forwards;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #D4AF37 20%, #D4AF37 80%, transparent);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+  animation: underlineExpandFromCenter 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   will-change: width, opacity;
+  transform-origin: center;
 }
 
-@keyframes underlineExpandSmooth {
+@keyframes underlineExpandFromCenter {
   0% {
     width: 0;
     opacity: 0;
-  }
-  30% {
-    opacity: 0.5;
-  }
-  60% {
-    opacity: 1;
   }
   100% {
     width: 400px;
@@ -526,16 +524,18 @@ h1 {
 
 .intro-welcome {
   font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
   text-align: center;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
   margin: 0;
-  animation: quickFadeIn 0.6s ease-out;
+  animation: netflixFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
   animation-fill-mode: forwards;
   will-change: transform, opacity;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  text-transform: lowercase;
 }
 
 .intro-update {
@@ -564,14 +564,15 @@ h1 {
 
 .click-hint {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 3px;
   opacity: 0;
-  animation: quickFadeIn 0.5s ease-out forwards;
-  will-change: opacity;
+  animation: netflixFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: opacity, transform;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .cursor {
@@ -770,14 +771,14 @@ h1 {
   margin: 0 auto;
 }
 
-.about-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 3rem;
-  color: #D4AF37;
-  text-align: center;
-  letter-spacing: 4px;
+.about-intro {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 2rem;
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 /* Education Page Styles */
@@ -1191,9 +1192,8 @@ h1 {
   }
   
   /* About Section */
-  .about-name {
-    font-size: 2rem;
-    letter-spacing: 2px;
+  .about-intro {
+    font-size: 1.1rem;
   }
   
   /* Education Section */
@@ -1455,8 +1455,8 @@ h1 {
     order: -1;
   }
   
-  .about-name {
-    font-size: 1.5rem;
+  .about-intro {
+    font-size: 1rem;
   }
   
   /* Skills Section */

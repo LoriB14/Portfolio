@@ -3,8 +3,7 @@ export default function About() {
     <section id="about" className="section">
       <h2>About Me</h2>
       <div className="about-content">
-        <h3 className="about-name">Lori Battouk</h3>
-        <p>
+        <p className="about-intro">
           I'm a computer science student and emerging developer with a strong interest in 
           building clean, modern, and user-friendly web experiences. I'm still learning, 
           but I'm dedicated, curious, and constantly improving my skills through hands-on 
